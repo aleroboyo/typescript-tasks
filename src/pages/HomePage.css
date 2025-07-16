@@ -1,0 +1,84 @@
+body {
+    color: rgb(59, 58, 58);
+    background-color: rgb(247, 247, 247);
+}
+
+.header {
+    display: flex;
+}
+
+.assetHead {
+    margin-right: 45rem;
+}
+
+.searchInput {
+    width: 10rem;
+    height: 2rem;
+    padding-left: 1rem;
+    margin-top: 1rem;
+}
+
+.searchBtn-img {
+    width: 15px;
+}
+
+.searchBtn {
+    width: 2.4rem;
+    height: 2.4rem;
+    margin-top: 1rem;
+    margin-right: 2rem;
+    cursor: pointer;
+}
+
+.createButton {
+    background-color: #21714B;
+    border-style: none;
+    border-radius: 1.5rem;
+    color: white;
+    width: 5rem;
+    height: 2rem;
+    margin-top: 1.2rem;
+    cursor: pointer;
+}
+
+.createButton:hover {
+    border: black solid 1px;
+}
+
+thead {
+    font-weight: bolder;
+
+}
+
+.thead-details {
+    border-top-style: none;
+    background-color: rgb(237, 236, 236);
+    
+}
+
+
+tr {
+    border-style: none;  
+}
+
+th, td {
+    padding-right: 10rem;
+    padding-top: 0.5rem;
+    text-align: left;
+    border-top: 1px solid #e5e5e5;
+    font-size: 14px;
+}
+   
+table tr:not(:last-child) td {
+    border-bottom: 1px solid #e5e5e5;
+}
+
+table {
+    border: rgb(223, 222, 222);
+    border-style: solid;
+    border-collapse: collapse;
+    border-radius: 1.5rem;
+}
+
+
+

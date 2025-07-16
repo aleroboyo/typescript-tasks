@@ -1,0 +1,90 @@
+.container {
+    color: rgb(59, 58, 58);  
+}
+
+.return-btn {
+    text-decoration: none;
+    font-size: 25px;
+    font-weight: bolder;
+    color: black;
+    cursor: pointer;
+}
+
+.form-container {
+    text-align: center;
+    margin-top: 3rem;
+    
+}
+
+.form-pt {
+    display: flex;
+    margin-bottom: 2rem;
+    margin-left: 15rem;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    margin-right: 2rem;
+}
+
+label {
+    margin-bottom: 0.5rem;
+}
+
+input {
+    width: 20rem;
+    height: 2rem;
+    padding-left: 1rem;
+}
+
+input::placeholder {
+    color: rgb(209, 209, 209);
+}
+
+select {
+    width: 21.5rem;
+    height: 2.3rem;
+    padding-left: 0.5rem;
+    color: rgb(209, 209, 209);
+}
+
+#descriptionInfo {
+    margin-left: 12rem;
+}
+
+#descriptionInput {
+    height: 7rem;
+}
+
+.action-btns {
+    margin-left: 13.5rem;
+}
+
+#clear-btn ,
+#addAsset-btn {
+    border-radius: 1.5rem;
+    width: 5rem;
+    height: 2rem;
+    border-style: none;
+    cursor: pointer;
+}
+
+#clear-btn {
+    background-color: white;
+    margin-right: 1rem;
+}
+
+#clear-btn:hover ,
+#addAsset-btn:hover {
+    border: black solid 1px;
+}
+
+#addAsset-btn {
+    background-color: #21714B;
+    color: white;  
+}
+
+
+
