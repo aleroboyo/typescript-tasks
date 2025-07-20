@@ -1,15 +1,18 @@
-import { FetchHook } from '../components/FetchHook'
+import { fetchHook } from '../helpers/assetHelpers'
 import './HomePage.css'
 import { Link } from 'react-router'
+import { useAssetContext } from "../context/AssetContext"
 
 export function HomePage () {
+    const { assets } = useAssetContext()
+
     return (
         <>
             <title>Home</title>
 
             <div className='header'>
                 <h1 className='assetHead'>Asset</h1>
-                <input className='searchInput' placeholder='Input Asset Type'></input><button className='searchBtn' onClick={FetchHook}><img className='searchBtn-img' src='src/assets/search.png'/></button>
+                <input className='searchInput' placeholder='Input Asset Type'></input><button className='searchBtn' onClick={fetchHook}><img className='searchBtn-img' src='src/assets/search.png'/></button>
                 <Link to='create-asset'> <button className='createButton'> + Create</button> </Link> 
             </div>
 
@@ -25,13 +28,15 @@ export function HomePage () {
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>6466</td>
-                            <td>Hp Laptop</td>
-                            <td>Hardware</td>
-                            <td>Laptop</td>
-                            <td>This is a Laptop</td>
-                        </tr>
+                        {assets.map((asset, index) => (
+                            <tr key={index}>
+                                <td>{asset.serialNo}</td>
+                                <td>{asset.name}</td>
+                                <td>{asset.category}</td>
+                                <td>{asset.type}</td>
+                                <td>{asset.description}</td>
+                            </tr>
+                        ))}
                     </tbody>
                 </table>
             </div>

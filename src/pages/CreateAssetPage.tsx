@@ -1,66 +1,93 @@
 import { Link } from 'react-router'
-import { AddAsset } from '../components/AddAsset'
-import { RemoveAsset } from '../components/RemoveAsset'
 import './CreateAssetPage.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faChevronLeft } from '@fortawesome/free-solid-svg-icons'
+import { useState } from "react"
+import { useNavigate } from 'react-router'
+import { resetAssetForm } from '../helpers/assetHelpers'
+import { useAssetContext } from '../context/AssetContext'
 
+type AssetCategory = "software" | "hardware" | ""
 
-export function CreateAssetPage () {
-    return (
-        <>
-            <title>Create Asset</title>
+export function CreateAssetPage() {
+  const [name, setName] = useState("")
+  const [category, setCategory] = useState<AssetCategory>("")
+  const [type, setType] = useState("")
+  const [serialNo, setSerialNo] = useState("")
+  const [description, setDescription] = useState("")
 
-            <div className='container'>
-                <div>
-                    <Link to='/' className='return-btn'><FontAwesomeIcon icon={faChevronLeft}/> Asset</Link>
-                </div>
+  const navigate = useNavigate()
+  const { addAsset } = useAssetContext()
 
-                <div className='form-container'>
-                    <form>
-                        <div className='form-pt'>
-                            <div className='form-group'>
-                                <label>Name</label>
-                                <input type='text' placeholder="Enter Name"></input>
-                            </div>
+  const handleAddAsset = (e: React.MouseEvent) => {
+    e.preventDefault()
 
-                            <div className='form-group'>
-                                <label>Category</label>
-                                <select>
-                                    <option>Select Category</option>
-                                    <option>Hardware</option>
-                                    <option>Software</option>
-                                </select>
-                            </div>
-                        </div>
+    const newAsset = { name, category, type, serialNo, description }
 
-                        <div className='form-pt'>
-                            <div className='form-group'>
-                                <label>Type</label>
-                                <input type="text" placeholder="Enter Type"></input>
-                            </div>
+    const success = addAsset(newAsset)
+    if (success) {
+      resetAssetForm({ setName, setCategory, setType, setSerialNo, setDescription })
+      navigate("/")
+    }
+  }
 
-                            <div className='form-group'>
-                                <label>Serial Number</label>
-                                <input type='text' placeholder="Enter Serial Number"></input>
-                            </div>
-                        </div>
+  const handleReset = (e: React.MouseEvent) => {
+    e.preventDefault()
+    resetAssetForm({ setName, setCategory, setType, setSerialNo, setDescription })
+  }
 
-                        <div className='form-pt'>
-                            <div className='form-group' id='descriptionInfo'>
-                                <label>Description</label>
-                                <input type='text' placeholder="Enter Note..." id='descriptionInput'></input>
-                            </div>
-                        </div>
-                    </form>
-                    
+  return (
+    <>
+      <title>Create Asset</title>
+      <div className='container'>
+        <div>
+          <Link to='/' className='return-btn'><FontAwesomeIcon icon={faChevronLeft}/> Asset</Link>
+        </div>
 
-                    <div className='action-btns'>
-                        <button id='clear-btn' onClick={RemoveAsset}>Cancel</button>
-                        <button id='addAsset-btn' onClick={AddAsset}>Add</button>
-                    </div>
-                </div>
+        <div className='form-container'>
+          <form>
+            <div className='form-pt'>
+              <div className='form-group'>
+                <label>Name</label>
+                <input type='text' placeholder="Enter Name" className='nameInput' value={name} onChange={(e) => setName(e.target.value)} />
+              </div>
+
+              <div className='form-group'>
+                <label>Category</label>
+                <select className='categoryInput' value={category} onChange={(e) => setCategory(e.target.value as AssetCategory)}>
+                  <option value=''>Select Category</option>
+                  <option value='hardware'>Hardware</option>
+                  <option value='software'>Software</option>
+                </select>
+              </div>
             </div>
-        </>
-    )
+
+            <div className='form-pt'>
+              <div className='form-group'>
+                <label>Type</label>
+                <input type="text" placeholder="Enter Type" className='typeInput' value={type} onChange={(e) => setType(e.target.value)} />
+              </div>
+
+              <div className='form-group'>
+                <label>Serial Number</label>
+                <input type='text' placeholder="Enter Serial Number" className='serialNoInput' value={serialNo} onChange={(e) => setSerialNo(e.target.value)} />
+              </div>
+            </div>
+
+            <div className='form-pt'>
+              <div className='form-group' id='descriptionInfo'>
+                <label>Description</label>
+                <input type='text' placeholder="Enter Note..." id='descriptionInput' className='description-Input' value={description} onChange={(e) => setDescription(e.target.value)} />
+              </div>
+            </div>
+          </form>
+
+          <div className='action-btns'>
+            <button id='clear-btn' onClick={handleReset}>Cancel</button>
+            <button id='addAsset-btn' onClick={handleAddAsset}>Add</button>
+          </div>
+        </div>
+      </div>
+    </>
+  )
 }
