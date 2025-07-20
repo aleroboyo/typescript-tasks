@@ -27,6 +27,10 @@ export function resetAssetForm(setters: {
     setters.setDescription('')
 }
 
-export function fetchHook() {
-
+export async function fetchHook<T>(data: T): Promise<T> {
+    return new Promise((resolve) => {
+        setTimeout(() => {
+          resolve(data)
+        }, 500)
+    })
 }

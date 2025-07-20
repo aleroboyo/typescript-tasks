@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { fetchHook } from '../helpers/assetHelpers'
 import './HomePage.css'
 import { Link } from 'react-router'
@@ -5,6 +6,16 @@ import { useAssetContext } from "../context/AssetContext"
 
 export function HomePage () {
     const { assets } = useAssetContext()
+    const [input, setInput] = useState('')
+    const [filteredAssets, setFilteredAssets] = useState(assets)
+
+    const handleFetch = async () => {
+        const filtered = assets.filter(asset =>
+            asset.type.toLowerCase().includes(input.toLowerCase())
+        )
+        const result = await fetchHook<typeof filtered>(filtered)
+        setFilteredAssets(result)
+    }
 
     return (
         <>
@@ -12,7 +23,7 @@ export function HomePage () {
 
             <div className='header'>
                 <h1 className='assetHead'>Asset</h1>
-                <input className='searchInput' placeholder='Input Asset Type'></input><button className='searchBtn' onClick={fetchHook}><img className='searchBtn-img' src='src/assets/search.png'/></button>
+                <input className='searchInput' placeholder='Input Asset Type' value={input} onChange={(e) => setInput(e.target.value)}></input><button className='searchBtn' onClick={handleFetch}><img className='searchBtn-img' src='src/assets/search.png'/></button>
                 <Link to='create-asset'> <button className='createButton'> + Create</button> </Link> 
             </div>
 
@@ -28,7 +39,7 @@ export function HomePage () {
                         </tr>
                     </thead>
                     <tbody>
-                        {assets.map((asset, index) => (
+                        {filteredAssets.map((asset, index) => (
                             <tr key={index}>
                                 <td>{asset.serialNo}</td>
                                 <td>{asset.name}</td>
