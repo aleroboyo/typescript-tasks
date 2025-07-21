@@ -11,8 +11,9 @@ export function HomePage () {
 
     const handleFetch = async () => {
         const filtered = assets.filter(asset =>
-            asset.type.toLowerCase().includes(input.toLowerCase())
+            asset.serialNo.toLowerCase().includes(input.toLowerCase()) || asset.name.toLowerCase().includes(input.toLowerCase()) || asset.category.toLowerCase().includes(input.toLowerCase()) ||asset.type.toLowerCase().includes(input.toLowerCase())
         )
+
         const result = await fetchHook<typeof filtered>(filtered)
         setFilteredAssets(result)
     }
@@ -23,7 +24,7 @@ export function HomePage () {
 
             <div className='header'>
                 <h1 className='assetHead'>Asset</h1>
-                <input className='searchInput' placeholder='Input Asset Type' value={input} onChange={(e) => setInput(e.target.value)}></input><button className='searchBtn' onClick={handleFetch}><img className='searchBtn-img' src='/assets/search.png'/></button>
+                <input className='searchInput' placeholder='Search...' value={input} onChange={(e) => setInput(e.target.value)}></input><button className='searchBtn' onClick={handleFetch}><img className='searchBtn-img' src='/assets/search.png'/></button>
                 <Link to='create-asset'> <button className='createButton'> + Create</button> </Link> 
             </div>
 
