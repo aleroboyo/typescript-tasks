@@ -23,7 +23,7 @@ export function HomePage () {
 
             <div className='header'>
                 <h1 className='assetHead'>Asset</h1>
-                <input className='searchInput' placeholder='Input Asset Type' value={input} onChange={(e) => setInput(e.target.value)}></input><button className='searchBtn' onClick={handleFetch}><img className='searchBtn-img' src='src/assets/search.png'/></button>
+                <input className='searchInput' placeholder='Input Asset Type' value={input} onChange={(e) => setInput(e.target.value)}></input><button className='searchBtn' onClick={handleFetch}><img className='searchBtn-img' src='/assets/search.png'/></button>
                 <Link to='create-asset'> <button className='createButton'> + Create</button> </Link> 
             </div>
 
