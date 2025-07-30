@@ -16,6 +16,10 @@ export function HomePage () {
 
         const result = await fetchHook<typeof filtered>(filtered)
         setFilteredAssets(result)
+
+        /*if (KeyboardEvent === "Enter") {
+            handleFetch ()
+        }*/
     }
 
     return (
